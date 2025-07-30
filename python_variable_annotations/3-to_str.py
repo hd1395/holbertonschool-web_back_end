@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Basic annotations - Define variables
+Basic annotations - to string
 """
 
 
-a: int = 1
-pi: float = 3.14
-i_understand_annotations: bool = True
-school: str = "Holberton"
+def to_str(n: float) -> str:
+    """
+    This function takes a float n and returns its string representation.
+    """
+    return str(n)
