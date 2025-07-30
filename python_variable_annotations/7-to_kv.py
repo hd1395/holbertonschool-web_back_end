@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 """
-Basic annotations - Complex types - functions
+Basic annotations - string and int/float to tuple
 """
 
-from typing import Callable
+from typing import Union, Tuple
 
 
-def make_multiplier(multiplier: float) -> Callable[[float], float]:
+def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """
-    Creates and returns a function that multiplies a float by a given multiplier.
+    Takes a string k and an int or float v and returns a tuple.
+    The first element is the string k.
+    The second element is the square of v, annotated as a float.
     """
-    def multiplier_function(x: float) -> float:
-        """
-        Multiplies a float by the captured multiplier.
-        """
-        return x * multiplier
-
-    return multiplier_function
+    return (k, float(v**2))
