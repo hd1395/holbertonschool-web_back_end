@@ -5,7 +5,7 @@ Module for simple pagination of the Popular Baby Names dataset.
 
 import csv
 import math
-from typing import List, Tuple
+from typing import List, Tuple, Dict, Any
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
