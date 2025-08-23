@@ -1,52 +1,83 @@
-class HolbertonCourse {
+/**
+ * Represents a Holberton course with a name, length, and a list of students.
+ * @class
+ */
+export default class HolbertonCourse {
+  /**
+   * Creates a HolbertonCourse instance.
+   * @param {string} name - The name of the course.
+   * @param {number} length - The length of the course in months.
+   * @param {string[]} students - An array of student names.
+   */
   constructor(name, length, students) {
+    if (typeof name !== 'string') {
+      throw new TypeError('Name must be a string');
+    }
     this.name = name;
+    if (typeof length !== 'number') {
+      throw new TypeError('Length must be a number');
+    }
     this.length = length;
     this.students = students;
   }
 
   /**
-   * @param {String} name
+   * Gets the name of the course.
+   * @returns {string} The name of the course.
    */
-  set name(name) {
-    if (typeof name !== 'string') {
-      throw new TypeError('Name must be a string');
-    }
-    this._name = name;
-  }
-
   get name() {
     return this._name;
   }
 
   /**
-   * @param {Number} length
+   * Sets the name of the course.
+   * @param {string} newName - The new name for the course.
+   * @throws {TypeError} If the name is not a string.
    */
-  set length(length) {
-    if (typeof length !== 'number') {
-      throw new TypeError('Length must be a number');
+  set name(newName) {
+    if (typeof newName !== 'string') {
+      throw new TypeError('Name must be a string');
     }
-    this._length = length;
+    this._name = newName;
   }
 
+  /**
+   * Gets the length of the course.
+   * @returns {number} The length of the course.
+   */
   get length() {
     return this._length;
   }
 
   /**
-   * @param {Array} students
+   * Sets the length of the course.
+   * @param {number} newLength - The new length for the course.
+   * @throws {TypeError} If the length is not a number.
    */
-  set students(students) {
-    if (students instanceof Array) {
-      this._students = students;
-    } else {
-      throw new TypeError('Students must be an Array');
+  set length(newLength) {
+    if (typeof newLength !== 'number') {
+      throw new TypeError('Length must be a number');
     }
+    this._length = newLength;
   }
 
+  /**
+   * Gets the students in the course.
+   * @returns {string[]} The array of student names.
+   */
   get students() {
     return this._students;
   }
-}
 
-export default HolbertonCourse;
+  /**
+   * Sets the students in the course.
+   * @param {string[]} newStudents - The new array of students.
+   * @throws {TypeError} If students is not an array of strings.
+   */
+  set students(newStudents) {
+    if (!Array.isArray(newStudents) || !newStudents.every(student => typeof student === 'string')) {
+      throw new TypeError('Students must be an array of strings');
+    }
+    this._students = newStudents;
+  }
+}
