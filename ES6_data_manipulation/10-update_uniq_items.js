@@ -3,11 +3,11 @@ function updateUniqueItems(map) {
         throw new Error('Cannot process');
     }
     
-    for (const [item, quantity] of map) {
+    map.forEach((quantity, item, mapInstance) => {
         if (quantity === 1) {
-            map.set(item, 100);
+            mapInstance.set(item, 100);
         }
-    }
+    });
     
     return map;
 }
