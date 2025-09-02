@@ -14,18 +14,18 @@ module.exports = function countStudents(path) {
   const groups = {};
   const studentsObjects = [];
 
-  data.forEach((row) => {
-    if (row) {
-      const student = row.split(',');
+  data.forEach((item) => {
+    if (item) {
+      const student = item.split(',');
       const studentObject = {};
 
       headers.forEach((header, index) => {
         studentObject[header] = student[index];
         if (header === 'field') {
-          if (groups[info[index]]) {
-            groups[info[index]].push(studentObject.firstname);
+          if (groups[student[index]]) {
+            groups[student[index]].push(studentObject.firstname);
           } else {
-            groups[info[index]] = [studentObject.firstname];
+            groups[student[index]] = [studentObject.firstname];
           }
         }
       });
@@ -35,10 +35,10 @@ module.exports = function countStudents(path) {
 
   console.log(`Number of students: ${studentsObjects.length}`);
 
-  for (const group in groups) {
-    if (groups[group]) {
-      const listStudents = groups[group];
-      console.log(`Number of students in ${group}: ${listStudents.length}. List: ${listStudents.join(', ')}`);
+  for (const item in groups) {
+    if (groups[item]) {
+      const listStudents = groups[item];
+      console.log(`Number of students in ${item}: ${listStudents.length}. List: ${listStudents.join(', ')}`);
     }
   }
 };
