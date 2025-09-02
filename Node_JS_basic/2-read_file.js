@@ -1,47 +1,44 @@
 const fs = require('fs');
 
 module.exports = function countStudents(path) {
+  let data = [];
+
   try {
-    const data = fs.readFileSync(path, 'utf8').trim();
-    if (!data) {
-      throw new Error('Cannot load the database');
-    }
-
-    // Split into lines and remove the header
-    const lines = data.split('\n').filter((line) => line.trim() !== '');
-    const header = lines.shift().split(',');
-
-    // Find indexes for relevant fields
-    const firstNameIndex = header.indexOf('firstname');
-    const fieldIndex = header.indexOf('field');
-
-    if (firstNameIndex === -1 || fieldIndex === -1) {
-      throw new Error('Cannot load the database');
-    }
-
-    console.log(`Number of students: ${lines.length}`);
-
-    const fields = {};
-
-    for (const line of lines) {
-      const record = line.split(',');
-      const field = record[fieldIndex];
-      const firstName = record[firstNameIndex];
-
-      if (field && firstName) {
-        if (!fields[field]) {
-          fields[field] = [];
-        }
-        fields[field].push(firstName);
-      }
-    }
-
-    for (const [field, students] of Object.entries(fields)) {
-      console.log(
-        `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}`
-      );
-    }
+    data = fs.readFileSync(path, { encoding: 'utf8', flag: 'r' });
   } catch (err) {
-    throw new Error('Cannot load the database');
+    throw Error('Cannot load the database');
+  }
+  data = data.split('\n');
+  const headers = data.shift().split(',');
+
+  const groups = {};
+  const studentsObjects = [];
+
+  data.forEach((row) => {
+    if (row) {
+      const student = row.split(',');
+      const studentObject = {};
+
+      headers.forEach((header, index) => {
+        studentObject[header] = student[index];
+        if (header === 'field') {
+          if (groups[info[index]]) {
+            groups[info[index]].push(studentObject.firstname);
+          } else {
+            groups[info[index]] = [studentObject.firstname];
+          }
+        }
+      });
+      studentsObjects.push(studentObject);
+    }
+  });
+
+  console.log(`Number of students: ${studentsObjects.length}`);
+
+  for (const group in groups) {
+    if (groups[group]) {
+      const listStudents = groups[group];
+      console.log(`Number of students in ${group}: ${listStudents.length}. List: ${listStudents.join(', ')}`);
+    }
   }
 };
