@@ -1,4 +1,4 @@
-// 1-stdin.js
+#!/usr/bin/node
 
 process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
