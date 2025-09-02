@@ -8,25 +8,25 @@ module.exports = function countStudents(path) {
         return;
       }
 
-      let data = params;
-      data = data.split('\n');
-      const headers = data.shift().split(',');
+      let s = params;
+      s = s.split('\n');
+      const headers = s.shift().split(',');
 
       const groups = {};
       const studentsObjects = [];
 
-      data.forEach((item) => {
-        if (item) {
-          const student = item.split(',');
+      s.forEach((student) => {
+        if (student) {
+          const info = student.split(',');
           const studentObject = {};
 
           headers.forEach((header, index) => {
-            studentObject[header] = student[index];
+            studentObject[header] = info[index];
             if (header === 'field') {
-              if (groups[student[index]]) {
-                groups[student[index]].push(studentObject.firstname);
+              if (groups[info[index]]) {
+                groups[info[index]].push(studentObject.firstname);
               } else {
-                groups[student[index]] = [studentObject.firstname];
+                groups[info[index]] = [studentObject.firstname];
               }
             }
           });
@@ -38,12 +38,12 @@ module.exports = function countStudents(path) {
       let response = `${number}\n`;
       console.log(number);
 
-      for (const item in groups) {
-        if (groups[item]) {
-          const list = groups[item];
-          const num_of_students = `Number of students in ${item}: ${list.length}. List: ${list.join(', ')}`;
-          response += `${num_of_students}\n`;
-          console.log(num_of_students);
+      for (const i in groups) {
+        if (groups[i]) {
+          const list = groups[i];
+          const j = `Number of students in ${i}: ${list.length}. List: ${list.join(', ')}`;
+          response += `${j}\n`;
+          console.log(j);
         }
       }
       resolve(response);
