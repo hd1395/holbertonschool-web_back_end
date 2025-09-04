@@ -1,8 +1,8 @@
 import { readDatabase } from '../utils.js';
 
 class StudentsController {
-  static getAllStudents(req, res) {
-    const dbPath = process.argv[2];
+  static getAllStudents(req, res, dbPath) {
+    //const dbPath = process.argv[2];
 
     readDatabase(dbPath)
       .then((fields) => {
@@ -24,9 +24,9 @@ class StudentsController {
       });
   }
 
-  static getAllStudentsByMajor(req, res) {
+  static getAllStudentsByMajor(req, res, dbPath) {
     const { major } = req.params;
-    const dbPath = process.argv[2];
+    //const dbPath = process.argv[2];
 
     if (major !== 'CS' && major !== 'SWE') {
       return res.status(500).send('Major parameter must be CS or SWE');
