@@ -1,10 +1,11 @@
 import express from 'express';
-import routes from './routes/index.js';
+import routing from './routes/index.js';
 
 const app = express();
 const port = 1245;
 
-app.use('/', routes);
+
+routing(app);
 
 app.listen(port);
 
