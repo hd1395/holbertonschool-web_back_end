@@ -2,7 +2,16 @@ import express from 'express';
 import AppController from '../controllers/AppController.js';
 import StudentsController from '../controllers/StudentsController.js';
 
-export default function routing(app) {
+const router = express.Router();
+
+// Root route
+router.get('/', AppController.getHomepage);
+
+// Students routes
+router.get('/students', StudentsController.getAllStudents);
+router.get('/students/:major', StudentsController.getAllStudentsByMajor);
+
+export default function controllerRouting(app) {
   const router = express.Router();
   app.use('/', router);
 
@@ -18,3 +27,4 @@ export default function routing(app) {
     StudentsController.getAllStudentsByMajor(req, res, process.argv[2]);
   });
 }
+
