@@ -1,8 +1,8 @@
 import { readDatabase } from '../utils.js';
 
 class StudentsController {
-  static getAllStudents(req, res) {
-    const dbPath = process.argv[2];
+  static getAllStudents(req, res, dbPath) {
+    //const dbPath = process.argv[2];
 
     readDatabase(dbPath)
       .then((fields) => {
